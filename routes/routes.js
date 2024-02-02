@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 const users = require('../data/users');
 const { generateToken, verifyToken } = require('../middlewares/middlewares');
+const axios = require('axios');
 
 router.get('/', (req, res)=>{
-
+    const token = req.session.token;
     /*if(req.session.token) {
         res.send(`
             <a href="/search">Search</a>
@@ -39,7 +40,7 @@ router.post('/login', (req, res) => {
     if (user) {
         const token = generateToken(user);
         req.session.token = token;
-        res.redirect('/character');
+        res.redirect('/search');
     } else {
         res.status(401).json({ mensaje: 'Credenciales incorrectas' });
     }
@@ -47,19 +48,16 @@ router.post('/login', (req, res) => {
 
 router.get('/search', verifyToken, (req,res) => {
     res.send(`
-    <form action="/character" method="get">
-    <label for="character">Buscar personaje:</label>
-    <input type="text" id="character" name="character">
-    <buton type="submit" >Mostrar todos los personajes</button>
-    </form>
-    
-    <button type="submit" onclick="getCharacter()">Buscar</button>
+        <form action="/character/:name" method="post">
+        <label for="name">Buscar personaje:</label>
+        <input type="text" id="name" name="name">
+        <button type="submit" onclick="getCharacter()">Buscar</button>
+        </form>
     `)
-    res.redirect('/character');
 });
 
-router.get('/character',verifyToken, async (req,res) => {
-    const characterName = req.query.name;
+router.get('/character', async (req,res) => {
+    const characterName = req.params.name;
     const url = `https://rickandmortyapi.com/api/character`
     try {
         const response = await axios.get(url);
