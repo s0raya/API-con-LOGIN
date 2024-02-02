@@ -9,7 +9,7 @@ Todo lo haremos desde el lado del servidor, en este caso no usaremos el FRONT pa
 ## ¿Qué vamos a hacer?
 El ejercico consta de 2 partes:
 - Acceso a la API creada por nosotros de Rick and Morty. Podéis traerla a este archivo y adaptarla a lo que pide el ejercicio
-- Autenticación. Podéis usar autenticaciones anterirores y adaptarla a este ejercicio. 
+- Autenticación. Podéis usar autenticaciones anteriores y adaptarla a este ejercicio. 
 
 1. En la ruta "/" estará nuestra entrada a la validación con dos inputs de usuario y contraseña.
 Si conseguimos pasarla tendremos acceso a nuestra API de rick and morty para poder consumirla.
