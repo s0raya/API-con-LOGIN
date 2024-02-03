@@ -86,6 +86,7 @@ router.get('/character/:name', verifyToken, async (req,res) => {
             <form action="/logout" method="post">
                 <button type="submit">Cerrar sesion</button>
             </form>
+            <a href="/search">Buscador</a>
         
         `)
     }catch(error) {
